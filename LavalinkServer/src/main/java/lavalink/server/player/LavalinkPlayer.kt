@@ -59,8 +59,6 @@ class LavalinkPlayer(
         it.addListener(audioLossCounter)
     }
 
-    private var updateFuture: ScheduledFuture<*>? = null
-
     fun destroy() {
         audioPlayer.destroy()
     }
@@ -102,14 +100,9 @@ class LavalinkPlayer(
     }
 
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
-        updateFuture!!.cancel(false)
     }
 
     override fun onTrackStart(player: AudioPlayer, track: AudioTrack) {
-        if (updateFuture?.isCancelled == false) {
-            return
-        }
-
      
     }
 
