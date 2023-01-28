@@ -94,7 +94,7 @@ class LavalinkPlayer(
 
     override fun seekTo(position: Long) {
         val track = audioPlayer.playingTrack ?: throw RuntimeException("Can't seek when not playing anything")
-        track.position = position
+        track.position = track.position + position
     }
 
     override fun setVolume(volume: Int) {
@@ -110,12 +110,7 @@ class LavalinkPlayer(
             return
         }
 
-        updateFuture = socket.playerUpdateService.scheduleAtFixedRate(
-            { sendPlayerUpdate(socket, this) },
-            0,
-            serverConfig.playerUpdateInterval.toLong(),
-            TimeUnit.SECONDS
-        )
+     
     }
 
     private inner class Provider(connection: MediaConnection?) : OpusAudioFrameProvider(connection) {
