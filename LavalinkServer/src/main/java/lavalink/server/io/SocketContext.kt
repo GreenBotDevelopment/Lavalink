@@ -93,14 +93,7 @@ class SocketContext(
 
 
     init {
-        executor.scheduleAtFixedRate(statsCollector.createTask(this), 0, 1, TimeUnit.MINUTES)
-
-        playerUpdateService = Executors.newScheduledThreadPool(2) { r ->
-            val thread = Thread(r)
-            thread.name = "player-update"
-            thread.isDaemon = true
-            thread
-        }
+      log.info("just did something fun xD")
     }
 
     override fun getSessionId(): String {
