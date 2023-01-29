@@ -79,7 +79,6 @@ class LavalinkPlayer(
 
     override fun play(track: AudioTrack) {
         audioPlayer.playTrack(track)
-        sendPlayerUpdate(socket, this)
     }
 
     override fun stop() {
