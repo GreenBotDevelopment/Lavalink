@@ -82,7 +82,6 @@ class SocketContext(
     var resumeTimeout = 60L // Seconds
     private var sessionTimeoutFuture: ScheduledFuture<Unit>? = null
     private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
-    val playerUpdateService: ScheduledExecutorService
 
     val playingPlayers: List<LavalinkPlayer>
         get() {
