@@ -52,13 +52,11 @@ class AudioLoader(private val audioPlayerManager: AudioPlayerManager) : AudioLoa
     }
 
     override fun trackLoaded(audioTrack: AudioTrack) {
-        log.info("Loaded track ${audioTrack.info.title}")
         val track = audioTrack.toTrack(audioPlayerManager)
         loadResult.complete(LoadResult.trackLoaded(track))
     }
 
     override fun playlistLoaded(audioPlaylist: AudioPlaylist) {
-        log.info("Loaded playlist ${audioPlaylist.name}")
         val tracks = audioPlaylist.tracks.map { it.toTrack(audioPlayerManager) }
         if (audioPlaylist.isSearchResult) {
             loadResult.complete(LoadResult.searchResultLoaded(tracks))
@@ -68,7 +66,6 @@ class AudioLoader(private val audioPlayerManager: AudioPlayerManager) : AudioLoa
     }
 
     override fun noMatches() {
-        log.info("No matches found")
         loadResult.complete(LoadResult.noMatches)
     }
 
