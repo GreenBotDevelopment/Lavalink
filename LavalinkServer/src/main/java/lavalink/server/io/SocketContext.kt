@@ -92,7 +92,6 @@ class SocketContext(
 
 
     init {
-      log.info("just did something fun xD")
     }
 
     override fun getSessionId(): String {

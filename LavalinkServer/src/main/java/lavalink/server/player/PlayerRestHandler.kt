@@ -126,7 +126,6 @@ class PlayerRestHandler(
         if (playerUpdate.encodedTrack.isPresent || playerUpdate.identifier.isPresent) {
 
             if (noReplace && player.track != null) {
-                log.info("Skipping play request because of noReplace")
                 return ResponseEntity.ok(player.toPlayer(context))
             }
             player.setPause(if (playerUpdate.paused.isPresent) playerUpdate.paused.value else false)

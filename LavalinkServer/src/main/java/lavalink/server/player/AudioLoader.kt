@@ -46,7 +46,6 @@ class AudioLoader(private val audioPlayerManager: AudioPlayerManager) : AudioLoa
     fun load(identifier: String?): CompletionStage<LoadResult> {
         val isUsed = used.getAndSet(true)
         check(!isUsed) { "This loader can only be used once per instance" }
-        log.trace("Loading item with identifier $identifier")
         audioPlayerManager.loadItem(identifier, this)
         return loadResult
     }

@@ -84,7 +84,6 @@ class WebSocketHandler(
         val noReplace = json.optBoolean("noReplace", false)
 
         if (noReplace && player.track != null) {
-            log.info("Skipping play request because of noReplace")
             return
         }
 

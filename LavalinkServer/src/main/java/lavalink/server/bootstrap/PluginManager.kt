@@ -76,7 +76,6 @@ class PluginManager(config: PluginsConfig) {
     }
 
     private fun downloadJar(output: File, url: String) {
-        log.info("Downloading $url")
         Channels.newChannel(URL(url).openStream()).use {
             FileOutputStream(output).channel.transferFrom(it, 0, Long.MAX_VALUE)
         }
