@@ -182,8 +182,9 @@ class SocketServer(
 
         val context = contextMap[session.attributes["sessionId"]]
             ?: throw IllegalStateException("No context for session ID ${session.id}. Broken websocket?")
-        context.eventEmitter.onWebsocketMessageIn(message.payload)
         context.wsHandler.handle(json)
+        log.info("it's been transfered")
+
     }
 
     internal fun onSessionResumeTimeout(context: SocketContext) {

@@ -50,11 +50,8 @@ class WebSocketHandler(
     private val disabledFilters = serverConfig.filters.entries.filter { !it.value }.map { it.key }
 
     fun handle(json: JSONObject) {
-        if (!loggedWsCommandsDeprecationWarning) {
-            log.warn("Sending websocket commands to Lavalink has been deprecated and will be removed in API version 4. API version 3 will be removed in Lavalink 5. Please use the new REST endpoints instead.")
-            loggedWsCommandsDeprecationWarning = true
-        }
         val op = json.getString("op")
+        log.info("hnadling on op until here")
         val handler = handlers[op] ?: return log.warn("Unknown op '$op'")
         handler(json)
     }
