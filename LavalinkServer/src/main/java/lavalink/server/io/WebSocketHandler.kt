@@ -51,7 +51,6 @@ class WebSocketHandler(
 
     fun handle(json: JSONObject) {
         val op = json.getString("op")
-        log.info("hnadling on op until here")
         val handler = handlers[op] ?: return log.warn("Unknown op '$op'")
         handler(json)
     }

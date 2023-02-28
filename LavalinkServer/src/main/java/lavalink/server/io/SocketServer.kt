@@ -173,7 +173,6 @@ class SocketServer(
     override fun handleTextMessage(session: WebSocketSession, message: TextMessage) {
         val json = JSONObject(message.payload)
 
-        log.info(message.payload)
 
         if (!session.isOpen) {
             log.error("Ignoring closing websocket: ${session.remoteAddress!!}")
@@ -183,7 +182,6 @@ class SocketServer(
         val context = contextMap[session.attributes["sessionId"]]
             ?: throw IllegalStateException("No context for session ID ${session.id}. Broken websocket?")
         context.wsHandler.handle(json)
-        log.info("it's been transfered")
 
     }
 
