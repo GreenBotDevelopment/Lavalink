@@ -7,17 +7,22 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack
 import org.apache.commons.codec.binary.Base64
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import org.slf4j.LoggerFactory
+    companion object {
+        private val log = LoggerFactory.getLogger(EventEmitter::class.java)
+    }
+
 
 class TrackDecodingException(message: String) : Exception(message)
 
-fun decodeTrack(audioPlayerManager: AudioPlayerManager, message: String): AudioTrack {
+fun decodeTrack(audioPlayerManager: AudioPlayerManager, message: String): AudioTrack? {
     val bais = ByteArrayInputStream(Base64.decodeBase64(message))
     return try {
         audioPlayerManager.decodeTrack(MessageInput(bais)).decodedTrack
-            ?: throw TrackDecodingException("Failed to decode track")
+            ?: log.info("Hye bit")
     } catch (e: IllegalStateException) {
         // Handle the exception here
-        throw TrackDecodingException("An error occurred while decoding track: ${e.message}")
+       log.info("Hye bit")
     }
 }
 fun encodeTrack(audioPlayerManager: AudioPlayerManager, track: AudioTrack): String {

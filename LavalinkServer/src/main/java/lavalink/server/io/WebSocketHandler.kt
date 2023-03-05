@@ -84,7 +84,9 @@ class WebSocketHandler(
         }
 
         val track = decodeTrack(context.audioPlayerManager, json.getString("track"))
-
+        if(!track){
+            return
+        }
         if (json.has("startTime")) {
             track.position = json.getLong("startTime")
         }
