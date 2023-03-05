@@ -14,9 +14,10 @@ fun decodeTrack(audioPlayerManager: AudioPlayerManager, message: String): AudioT
     val bais = ByteArrayInputStream(Base64.decodeBase64(message))
     return try {
         audioPlayerManager.decodeTrack(MessageInput(bais)).decodedTrack
-            ?: throw Exception("Failed to decode track")
+            ?: throw TrackDecodingException("Failed to decode track")
     } catch (e: IllegalStateException) {
         // Handle the exception here
+        throw TrackDecodingException("An error occurred while decoding track: ${e.message}")
     }
 }
 fun encodeTrack(audioPlayerManager: AudioPlayerManager, track: AudioTrack): String {
