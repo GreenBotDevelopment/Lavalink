@@ -84,18 +84,5 @@ class AudioLoaderRestHandler(
         return ResponseEntity.ok(DecodedTrack(rightOne.encoded, rightOne.info, rightOne.info))
     }
 
-    @PostMapping(value = ["/decodetracks", "/v3/decodetracks"])
-    fun decodeTracks(@RequestBody encodedTracks: List<String>): ResponseEntity<List<Track?>> {
-        if (encodedTracks.isEmpty()) {
-            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "No tracks to decode provided")
-        }
-        return ResponseEntity.ok(encodedTracks.map {
-           val trackE = decodeTrack(audioPlayerManager, it) ?: throw ResponseStatusException(
-            HttpStatus.BAD_REQUEST,
-            "No track to decode provided"
-        )
-           val track = trackE   
-        })
-    }
 
 }
