@@ -85,7 +85,7 @@ class AudioLoaderRestHandler(
     }
 
     @PostMapping(value = ["/decodetracks", "/v3/decodetracks"])
-    fun decodeTracks(@RequestBody encodedTracks: List<String>): ResponseEntity<List<Track>> {
+    fun decodeTracks(@RequestBody encodedTracks: List<String>): ResponseEntity<List<Track?>> {
         if (encodedTracks.isEmpty()) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "No tracks to decode provided")
         }
