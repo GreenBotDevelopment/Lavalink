@@ -8,9 +8,6 @@ import org.apache.commons.codec.binary.Base64
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import org.slf4j.LoggerFactory
-    companion object {
-        private val log = LoggerFactory.getLogger(EventEmitter::class.java)
-    }
 
 
 class TrackDecodingException(message: String) : Exception(message)
@@ -18,8 +15,8 @@ class TrackDecodingException(message: String) : Exception(message)
 fun decodeTrack(audioPlayerManager: AudioPlayerManager, message: String): AudioTrack? {
     val bais = ByteArrayInputStream(Base64.decodeBase64(message))
     val track = audioPlayerManager.decodeTrack(MessageInput(bais))
-    val track2 = tracK.decodedTrack
-    if(!track2) return
+    val track2 = track.decodedTrack
+    if (track2 == null) return null
     return track2
 }
 fun encodeTrack(audioPlayerManager: AudioPlayerManager, track: AudioTrack): String {

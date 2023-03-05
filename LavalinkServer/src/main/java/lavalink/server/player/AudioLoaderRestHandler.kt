@@ -77,7 +77,7 @@ class AudioLoaderRestHandler(
             "No track to decode provided"
         )
         val decodedTrack = decodeTrack(audioPlayerManager, trackToDecode)
-        if(!decodedTrack) return
+        if(decodedTrack == null) return
         val rightOne = decodedTrack.toTrack(trackToDecode)
         return ResponseEntity.ok(DecodedTrack(rightOne.encoded, rightOne.info, rightOne.info))
     }
@@ -89,7 +89,7 @@ class AudioLoaderRestHandler(
         }
         return ResponseEntity.ok(encodedTracks.map {
            val trackE = decodeTrack(audioPlayerManager, it)
-           if(!trackE) return
+           if(trackE == null) return
            val track = trackE.toTrack(it)
         })
     }
